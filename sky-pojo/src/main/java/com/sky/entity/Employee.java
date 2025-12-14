@@ -30,7 +30,7 @@ public class Employee implements Serializable {
 
     private String idNumber;
 
-    private Integer status;
+    private Integer status;//表示状态,1正常,0锁定
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
