@@ -97,7 +97,7 @@ public class EmployeeController {
      */
     @GetMapping("/page")
     @ApiOperation ("员工分页查询")
-    public Result<PageResult> page(@RequestBody EmployeePageQueryDTO employeePageQueryDTO){
+    public Result<PageResult> page( EmployeePageQueryDTO employeePageQueryDTO){
         log.info("员工分页查询{}",employeePageQueryDTO);
         PageResult pageResult=employeeService.page(employeePageQueryDTO);
         return Result.success (pageResult);
@@ -126,7 +126,7 @@ public class EmployeeController {
         return Result.success (employee);
     }
 
-    @PostMapping
+    @PutMapping
     @ApiOperation ("修改员工信息")
     public Result update(@RequestBody EmployeeDTO employeeDTO){
         log.info("修改员工信息{}",employeeDTO);
