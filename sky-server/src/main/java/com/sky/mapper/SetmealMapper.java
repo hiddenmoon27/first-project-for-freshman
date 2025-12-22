@@ -1,7 +1,12 @@
 package com.sky.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.github.pagehelper.Page;
+import com.sky.annotation.AutoFill;
+import com.sky.dto.SetmealPageQueryDTO;
+import com.sky.entity.Setmeal;
+import com.sky.enumeration.OperationType;
+import com.sky.vo.SetmealVO;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,4 +23,24 @@ public interface SetmealMapper {
 
 
     List<Long> getSetMealByIds (List<Long> ids);
+
+    @AutoFill (OperationType.INSERT)
+    @Insert ("insert into setmeal(category_id, name, price, status,description, image, create_time, update_time, create_user, update_user)  values " +
+            "(#{categoryId}, #{name}, #{price}, #{status}, #{description}, #{image}, #{createTime}, #{updateTime}" +
+            ",#{createUser}, #{updateUser})")
+    void insert (Setmeal setmeal);
+
+    @Select ("select * from setmeal where id=#{id}")
+    Setmeal  getSetMealById (Long id);
+
+    @Delete ("delete from setmeal where id=#{ids}")
+    void delete (Long ids);
+
+
+
+    @AutoFill (OperationType.UPDATE)
+    void update (Setmeal setmeal);
+
+
+    Page<SetmealVO> pageQuery (SetmealPageQueryDTO setmealPageQueryDTO);
 }
